@@ -1,15 +1,13 @@
 import express from 'express'
 import cors from 'cors'
+import {arrayCounts, update} from './db'
 
 const app = express()
 const jsonMiddleware = express.json()
 app.use(cors())
 app.use(jsonMiddleware)
 const port = process.env.PORT || 3000
-let arrayCounts = [{
-    id: 1,
-    count: 42
-} as {id: number, count: number}]
+
 app.get('/', (request, response) => {
     const html = `<ul>
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
@@ -42,7 +40,8 @@ app.delete('/count', (request, response ) =>{
         response.status(422)
         return
     }
-    arrayCounts = arrayCounts.filter(item => item.count !== request.body.count)
+    const newArr = arrayCounts.filter(item => item.count !== request.body.count)
+    update(newArr)
     response.send(`all counts ${request.body.count} was delete`)
 })
 app.listen(port, () => {
