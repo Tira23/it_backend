@@ -1,13 +1,20 @@
 import express from 'express'
 import cors from 'cors'
-import {arrayCounts, update} from './db'
+import * as fs from "fs";
+
+interface IDB {
+    id: number
+    count: number
+}
+
 
 const app = express()
 const jsonMiddleware = express.json()
 app.use(cors())
 app.use(jsonMiddleware)
 const port = process.env.PORT || 3000
-
+const arrayCounts:IDB[]= JSON.parse(fs.readFileSync(__dirname + '/db.json')
+    .toString())
 app.get('/', (request, response) => {
     const html = `<ul>
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
@@ -35,13 +42,13 @@ app.post('/count', (request, response) => {
     response.send('this page count, count update to: ' + arrayCounts.at(-1)?.count)
 })
 
-app.delete('/count', (request, response ) =>{
+app.delete('/count', (request, response) => {
     if (typeof request.body.count !== 'number') {
         response.status(422)
         return
     }
     const newArr = arrayCounts.filter(item => item.count !== request.body.count)
-    update(newArr)
+    fs.writeFileSync('./db.json', JSON.stringify(newArr))
     response.send(`all counts ${request.body.count} was delete`)
 })
 app.listen(port, () => {
