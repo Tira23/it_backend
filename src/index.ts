@@ -13,7 +13,7 @@ const jsonMiddleware = express.json()
 app.use(cors())
 app.use(jsonMiddleware)
 const port = process.env.PORT || 3000
-const arrayCounts:IDB[]= JSON.parse(fs.readFileSync(__dirname + '/db.json')
+const arrayCounts:IDB[]= JSON.parse(fs.readFileSync('./db.json')
     .toString())
 app.get('/', (request, response) => {
     const html = `<ul>
