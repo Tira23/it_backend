@@ -7,10 +7,10 @@ app.use(jsonMiddleware)
 const port = process.env.PORT || 3000
 let count = 0
 app.get('/', (req, res) => {
-    res.send('Hello World!' + count)
+    res.send('Hello World!')
 })
 app.get('/count/:id', (req, res) => {
-    res.send('this page count: ' + req.params.id)
+    res.send('this page id: ' + req.params.id)
 })
 app.get('/count', (req, res) => {
     res.send('this page count, and count now: ' + count)
