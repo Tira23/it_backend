@@ -1,5 +1,6 @@
-import express, {response} from 'express'
+import express from 'express'
 import cors from 'cors'
+
 const app = express()
 const jsonMiddleware = express.json()
 app.use(cors())
@@ -9,18 +10,18 @@ let arrayCounts = [{
     id: 1,
     count: 42
 } as {id: number, count: number}]
-app.get('/', (req, res) => {
+app.get('/', (request, response) => {
     const html = `<ul>
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
    </ul>
 `
-    res.send(html)
+    response.send(html)
 })
-app.get('/count/:id', (req, res) => {
-    res.send('this page id: ' + req.params.id)
+app.get('/count/:id', (request, response) => {
+    response.send('this page id: ' + request.params.id)
 })
-app.get('/count', (req, res) => {
-    res.send('this page count, and count now: ' + arrayCounts.at(-1)?.count)
+app.get('/count', (request, response) => {
+    response.send('this page count, and count now: ' + arrayCounts.at(-1)?.count)
 })
 
 app.post('/count', (request, response) => {
