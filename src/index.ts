@@ -39,8 +39,7 @@ app.post('/', (request, response) => {
     // const email = request.body.email.json()
     const html = `
     <ul>
-        
-<li>Есть связь</li>
+        <li>Есть связь</li>
     </ul>
     `
     response.send(html)
