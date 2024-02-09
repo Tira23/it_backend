@@ -18,7 +18,6 @@ app.get('/', (request, response) => {
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
    </ul>
 `*/
-    console.log(request);
     const html = `
     <h1>Привет</h1>
     <ul>
@@ -31,15 +30,14 @@ app.get('/', (request, response) => {
 app.post('/', async (request, response) => {
 
     // console.log(await JSON.parse(request.body))
-    console.log(request.body);
     const obj:{login:string, email:string} = request.body
     const login = obj.login
     const email = obj.email
     const html = `
     <ul>
         <li>Есть связь</li>
-        <li>Вы прислали логин: ${login}</li>
-        <li>Вы прислали email: ${email}</li>
+        <li>Вы прислали логин: <strong>${login}</strong></li>
+        <li>Вы прислали email: <strong>${email}</strong></li>
     </ul>
     `
     response.send(html)
