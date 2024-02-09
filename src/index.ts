@@ -31,11 +31,8 @@ app.get('/', (request, response) => {
 app.post('/', async (request, response) => {
 
     // console.log(await JSON.parse(request.body))
-
-    const obj:{login:string, email:string} = await JSON.parse(request.body)
-    console.log(obj);
-    const obj2 = await request.body.json()
-    console.log(obj2);
+    console.log(request.body);
+    const obj:{login:string, email:string} = request.body
     const login = obj.login
     const email = obj.email
     const html = `
