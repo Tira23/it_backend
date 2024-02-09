@@ -18,6 +18,7 @@ app.get('/', (request, response) => {
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
    </ul>
 `*/
+    console.log(request);
     const html = `
     <h1>Привет</h1>
     <ul>
