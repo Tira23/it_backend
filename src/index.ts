@@ -33,14 +33,17 @@ app.post('/', (request, response) => {
    ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
    </ul>
 `*/
-    /*<li>Вы прислали логин: ${login}</li>
-        <li>Вы прислали email: ${email}</li>*/
-    console.log(request.body)
-    // const login = request.body.login.json()
-    // const email = request.body.email.json()
+
+    console.log(JSON.parse(request.body))
+
+    const obj:{login:string, email:string} = JSON.parse(request.body)
+    const login = obj.login
+    const email = obj.email
     const html = `
     <ul>
         <li>Есть связь</li>
+        <li>Вы прислали логин: ${login}</li>
+        <li>Вы прислали email: ${email}</li>
     </ul>
     `
     response.send(html)
