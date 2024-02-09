@@ -28,15 +28,11 @@ app.get('/', (request, response) => {
     `
     response.send(html)
 })
-app.post('/', (request, response) => {
-    /*const html = `<ul>
-   ${arrayCounts.map(item => `<li>   ${item.count}</li>`).join('')}
-   </ul>
-`*/
+app.post('/', async (request, response) => {
 
-    console.log(JSON.parse(request.body))
+    console.log(await JSON.parse(request.body))
 
-    const obj:{login:string, email:string} = JSON.parse(request.body)
+    const obj:{login:string, email:string} = await JSON.parse(request.body)
     const login = obj.login
     const email = obj.email
     const html = `
